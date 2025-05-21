@@ -7,4 +7,5 @@ pyYAML
 joblib
 types-PyYAML
 ensure
+gdown
 -e .
