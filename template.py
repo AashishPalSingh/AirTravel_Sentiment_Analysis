@@ -34,7 +34,7 @@ for filepath in list_of_files:
         logging.info("Creating directory; %s for the file: %s", filedir, filename)
 
     if (not os.path.exists(filepath)) or (os.path.getsize(filepath) == 0):
-        with open(filepath, encoding="utf-8") as f:
+        with open(filepath, "w", encoding="utf-8") as f:
             logging.info("Creating empty file: %s", filepath)
 
     else:

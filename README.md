@@ -25,3 +25,7 @@ pip install -r requirements.txt
 ```
 
 
+## Test Logger
+```bash
+python testlogger.py
+```
