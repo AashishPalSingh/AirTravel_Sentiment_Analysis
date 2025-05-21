@@ -6,4 +6,5 @@ python-box
 pyYAML
 joblib
 types-PyYAML
+ensure
 -e .
