@@ -2,4 +2,8 @@ dvc
 mlflow
 black
 pylint
+python-box
+pyYAML
+joblib
+types-PyYAML
 -e .
