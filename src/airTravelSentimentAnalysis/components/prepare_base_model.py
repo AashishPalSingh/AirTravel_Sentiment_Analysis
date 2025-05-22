@@ -3,6 +3,9 @@ from transformers import AutoModelForSequenceClassification
 from airTravelSentimentAnalysis.entity.config_entity import PrepareBaseModelConfig
 from pathlib import Path
 
+from airTravelSentimentAnalysis import logger
+from torchinfo import summary
+
 
 class PrepareBaseModel:
     def __init__(self, config: PrepareBaseModelConfig):
@@ -14,6 +17,11 @@ class PrepareBaseModel:
         )
 
         self.save_model(path=self.config.base_model_path, model=self.model)
+        for name, param in self.model.named_parameters():
+            if name.startswith("distilbert"):
+                param.requires_grad = False
+        logger.info("Base model summary: \n %s", summary(self.model))
+        return self.model
 
     def get_base_model_tokenizer(self):
         self.tokenizer = AutoTokenizer.from_pretrained(self.config.params_checkpoint)

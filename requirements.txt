@@ -18,4 +18,5 @@ pandas
 scikit-learn
 seaborn
 matplotlib
+torchinfo
 -e .

@@ -9,6 +9,10 @@ from airTravelSentimentAnalysis.pipeline.stage_03_preprocessing import (
     PrepareDataProcessingPipeline,
 )
 
+from airTravelSentimentAnalysis.pipeline.stage_04_text_processing import (
+    TextProcessingPipeline,
+)
+
 STAGE_NAME = "Data Ingestion stage"
 try:
     logger.info(">>>>>> stage %s started <<<<<<", STAGE_NAME)
@@ -36,6 +40,17 @@ try:
     logger.info(">>>>>> stage %s started <<<<<<", STAGE_NAME)
     preprocessing = PrepareDataProcessingPipeline()
     preprocessing.main()
+    logger.info(">>>>>> stage %s completed <<<<<<\n\nx==========x", STAGE_NAME)
+except Exception as e:
+    logger.exception(e)
+    raise e
+
+STAGE_NAME = "Text Processing stage"
+try:
+    logger.info("*******************")
+    logger.info(">>>>>> stage %s started <<<<<<", STAGE_NAME)
+    textProcessing = TextProcessingPipeline()
+    textProcessing.main()
     logger.info(">>>>>> stage %s completed <<<<<<\n\nx==========x", STAGE_NAME)
 except Exception as e:
     logger.exception(e)

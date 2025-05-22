@@ -4,6 +4,7 @@ from airTravelSentimentAnalysis.entity.config_entity import (
     DataIngestionConfig,
     PrepareBaseModelConfig,
     DataProcessingConfig,
+    TextProcessingConfig,
 )
 from pathlib import Path
 
@@ -58,3 +59,25 @@ class ConfigurationManager:
             params_random_state=self.params.RANDOM_STATE,
         )
         return data_processing_config
+
+    def get_text_processing_config(self) -> TextProcessingConfig:
+        config = self.config.text_processing
+        config["train_data_path"] = self.config.data_preprocessing.train_data_path
+        config["test_data_path"] = self.config.data_preprocessing.test_data_path
+        config["val_data_path"] = self.config.data_preprocessing.val_data_path
+
+        create_directories([config.root_dir])
+
+        text_processing_config = TextProcessingConfig(
+            root_dir=Path(config.root_dir),
+            train_data_path=Path(config.train_data_path),
+            test_data_path=Path(config.test_data_path),
+            val_data_path=Path(config.val_data_path),
+            train_tokenized_data_path=Path(config.train_tokenized_data_path),
+            test_tokenized_data_path=Path(config.test_tokenized_data_path),
+            val_tokenized_data_path=Path(config.val_tokenized_data_path),
+            params_model_name=self.params.MODEL_NAME,
+            params_text_col=self.params.TEXT_COL,
+        )
+
+        return text_processing_config

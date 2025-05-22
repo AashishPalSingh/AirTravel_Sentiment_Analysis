@@ -2,7 +2,6 @@ from airTravelSentimentAnalysis.config.configuration import ConfigurationManager
 from airTravelSentimentAnalysis.components.prepare_base_model import PrepareBaseModel
 from airTravelSentimentAnalysis import logger
 
-
 STAGE_NAME = "Prepare base model"
 
 

@@ -20,3 +20,9 @@ data_preprocessing:
   train_data_path: artifacts/data_preprocessing/train.csv
   test_data_path: artifacts/data_preprocessing/test.csv
   val_data_path: artifacts/data_preprocessing/val.csv
+
+text_processing:
+  root_dir: artifacts/text_processing
+  train_tokenized_data_path: artifacts/text_processing/train_tokenized.csv
+  test_tokenized_data_path: artifacts/text_processing/test_tokenized.csv
+  val_tokenized_data_path: artifacts/text_processing/val_tokenized.csv

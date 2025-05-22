@@ -32,3 +32,16 @@ class DataProcessingConfig:
     params_label_col: str
     params_text_col: str
     params_random_state: int
+
+
+@dataclass(frozen=False)
+class TextProcessingConfig:
+    root_dir: Path
+    train_tokenized_data_path: Path
+    test_tokenized_data_path: Path
+    val_tokenized_data_path: Path
+    train_data_path: Path
+    test_data_path: Path
+    val_data_path: Path
+    params_model_name: str
+    params_text_col: str
