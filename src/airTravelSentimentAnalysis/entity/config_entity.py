@@ -19,3 +19,16 @@ class PrepareBaseModelConfig:
     updated_base_tokenizer_path: Path
     params_checkpoint: str
     params_num_labels: int
+
+
+@dataclass(frozen=False)
+class DataProcessingConfig:
+    root_dir: Path
+    raw_data_file: str
+    train_data_path: Path
+    test_data_path: Path
+    val_data_path: Path
+    params_test_size: float
+    params_label_col: str
+    params_text_col: str
+    params_random_state: int

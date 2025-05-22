@@ -8,4 +8,14 @@ joblib
 types-PyYAML
 ensure
 gdown
+pyarrow
+datasets
+accelerate
+transformers
+tqdm
+numpy
+pandas
+scikit-learn
+seaborn
+matplotlib
 -e .

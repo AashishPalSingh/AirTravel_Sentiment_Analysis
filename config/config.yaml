@@ -3,6 +3,20 @@ artifacts_root: artifacts
 
 data_ingestion:
   root_dir: artifacts/data_ingestion
-  source_URL: https://drive.google.com/file/d/1DtGqLq1nvdqx7LpjpO8TrG6lytJFFH6F/view?usp=sharing
+  source_URL: https://drive.google.com/file/d/1taIeW6BZHqucmJbccEo92qfzZt5X_RTQ/view?usp=sharing
   local_data_file: artifacts/data_ingestion/data.zip
   unzip_dir: artifacts/data_ingestion
+
+prepare_base_model:
+  root_dir: artifacts/prepare_base_model
+  base_model_path: artifacts/prepare_base_model/base_model.h5
+  updated_base_model_path: artifacts/prepare_base_model/base_model_updated.h5
+  base_tokenizer_path: artifacts/prepare_base_tokenizer/base_model.h5
+  updated_base_tokenizer_path: artifacts/prepare_base_tokenizer/base_model_updated.h5
+
+data_preprocessing:
+  root_dir: artifacts/data_preprocessing
+  raw_data_file: artifacts/data_ingestion/bitext-travel-llm-chatbot-training-dataset.csv
+  train_data_path: artifacts/data_preprocessing/train.csv
+  test_data_path: artifacts/data_preprocessing/test.csv
+  val_data_path: artifacts/data_preprocessing/val.csv

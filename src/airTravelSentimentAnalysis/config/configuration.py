@@ -3,6 +3,7 @@ from airTravelSentimentAnalysis.utils.common import read_yaml, create_directorie
 from airTravelSentimentAnalysis.entity.config_entity import (
     DataIngestionConfig,
     PrepareBaseModelConfig,
+    DataProcessingConfig,
 )
 from pathlib import Path
 
@@ -19,23 +20,18 @@ class ConfigurationManager:
 
     def get_data_ingestion_config(self) -> DataIngestionConfig:
         config = self.config.data_ingestion
-
         create_directories([config.root_dir])
-
         data_ingestion_config = DataIngestionConfig(
             root_dir=config.root_dir,
             source_URL=config.source_URL,
             local_data_file=config.local_data_file,
             unzip_dir=config.unzip_dir,
         )
-
         return data_ingestion_config
 
     def get_prepare_base_model_config(self) -> PrepareBaseModelConfig:
         config = self.config.prepare_base_model
-
         create_directories([config.root_dir])
-
         prepare_base_model_config = PrepareBaseModelConfig(
             root_dir=Path(config.root_dir),
             base_model_path=Path(config.base_model_path),
@@ -45,5 +41,20 @@ class ConfigurationManager:
             params_checkpoint=self.params.CHECKPOINT,
             params_num_labels=self.params.NUM_LABELS,
         )
-
         return prepare_base_model_config
+
+    def get_data_processing_config(self) -> DataProcessingConfig:
+        config = self.config.data_preprocessing
+        create_directories([config.root_dir])
+        data_processing_config = DataProcessingConfig(
+            root_dir=Path(config.root_dir),
+            raw_data_file=config.raw_data_file,
+            train_data_path=Path(config.train_data_path),
+            test_data_path=Path(config.test_data_path),
+            val_data_path=Path(config.val_data_path),
+            params_test_size=self.params.TEST_SIZE,
+            params_label_col=self.params.LABEL_COL,
+            params_text_col=self.params.TEXT_COL,
+            params_random_state=self.params.RANDOM_STATE,
+        )
+        return data_processing_config
