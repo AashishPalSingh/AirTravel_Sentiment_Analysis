@@ -26,3 +26,11 @@ text_processing:
   train_tokenized_data_path: artifacts/text_processing/train_tokenized.csv
   test_tokenized_data_path: artifacts/text_processing/test_tokenized.csv
   val_tokenized_data_path: artifacts/text_processing/val_tokenized.csv
+
+model_training:
+  root_dir: artifacts/model_training
+  model_path: artifacts/model_training/model.h5
+  tokenizer_path: artifacts/model_training/tokenizer.h5
+  train_tokenized_data_path: artifacts/text_processing/train
+  test_tokenized_data_path: artifacts/text_processing/test
+  val_tokenized_data_path: artifacts/text_processing/val

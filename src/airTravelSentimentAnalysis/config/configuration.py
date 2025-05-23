@@ -81,3 +81,36 @@ class ConfigurationManager:
         )
 
         return text_processing_config
+
+    def get_model_training_config(self) -> ModelTrainingConfig:
+        config = self.config.model_training
+        config["base_model_path"] = self.config.prepare_base_model.base_model_path
+        config["base_tokenizer_path"] = (
+            self.config.prepare_base_model.base_tokenizer_path
+        )
+        params_training = self.params.TRAINING_ARGUMENTS
+        # print(f"Training arguments: {params_training}")
+        create_directories([config.root_dir])
+
+        model_training_config = ModelTrainingConfig(
+            root_dir=Path(config.root_dir),
+            base_model_path=Path(config.base_model_path),
+            base_tokenizer_path=Path(config.base_tokenizer_path),
+            model_path=Path(config.model_path),
+            tokenizer_path=Path(config.tokenizer_path),
+            train_tokenized_data_path=Path(config.train_tokenized_data_path),
+            test_tokenized_data_path=Path(config.test_tokenized_data_path),
+            val_tokenized_data_path=Path(config.val_tokenized_data_path),
+            params_model_name=self.params.MODEL_NAME,
+            params_evaluation_strategy=params_training.evaluation_strategy,
+            params_save_strategy=params_training.save_strategy,
+            params_learning_rate=params_training.learning_rate,
+            params_per_device_train_batch_size=params_training.per_device_train_batch_size,
+            params_per_device_eval_batch_size=params_training.per_device_eval_batch_size,
+            params_num_train_epochs=params_training.num_train_epochs,
+            params_weight_decay=params_training.weight_decay,
+            params_load_best_model_at_end=params_training.load_best_model_at_end,
+            params_metric_for_best_model=params_training.metric_for_best_model,
+        )
+
+        return model_training_config

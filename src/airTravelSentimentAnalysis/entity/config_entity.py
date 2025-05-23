@@ -45,3 +45,25 @@ class TextProcessingConfig:
     val_data_path: Path
     params_model_name: str
     params_text_col: str
+
+
+@dataclass(frozen=False)
+class ModelTrainingConfig:
+    root_dir: Path
+    base_model_path: Path
+    base_tokenizer_path: Path
+    model_path: Path
+    tokenizer_path: Path
+    train_tokenized_data_path: Path
+    test_tokenized_data_path: Path
+    val_tokenized_data_path: Path
+    params_model_name: str
+    params_evaluation_strategy: str
+    params_save_strategy: str
+    params_learning_rate: float
+    params_per_device_train_batch_size: int
+    params_per_device_eval_batch_size: int
+    params_num_train_epochs: int
+    params_weight_decay: float
+    params_load_best_model_at_end: bool
+    params_metric_for_best_model: str
