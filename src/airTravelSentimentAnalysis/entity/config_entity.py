@@ -58,7 +58,8 @@ class ModelTrainingConfig:
     test_tokenized_data_path: Path
     val_tokenized_data_path: Path
     params_model_name: str
-    params_evaluation_strategy: str
+    params_num_labels: int
+    params_eval_strategy: str
     params_save_strategy: str
     params_learning_rate: float
     params_per_device_train_batch_size: int
@@ -67,3 +68,9 @@ class ModelTrainingConfig:
     params_weight_decay: float
     params_load_best_model_at_end: bool
     params_metric_for_best_model: str
+    params_dagshub_repo_owner: str
+    params_dagshub_repo_name: str
+    params_dagshub_mlflow: bool
+    params_mlflow_tracking_uri: str
+    params_mlflow_experiment_name: str
+    params_mlflow_run_name: str

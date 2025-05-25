@@ -1,5 +1,5 @@
 dvc
-mlflow
+mlflow==2.12.1
 black
 pylint
 python-box
@@ -10,8 +10,8 @@ ensure
 gdown
 pyarrow
 datasets
-accelerate
-transformers
+accelerate==0.27.2
+transformers==4.39.3
 tqdm
 numpy
 pandas
@@ -19,4 +19,7 @@ scikit-learn
 seaborn
 matplotlib
 torchinfo
+peft==0.9.0
+dagshub
+torchvision
 -e .

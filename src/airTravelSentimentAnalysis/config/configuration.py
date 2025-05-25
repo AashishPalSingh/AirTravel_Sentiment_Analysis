@@ -5,6 +5,7 @@ from airTravelSentimentAnalysis.entity.config_entity import (
     PrepareBaseModelConfig,
     DataProcessingConfig,
     TextProcessingConfig,
+    ModelTrainingConfig,
 )
 from pathlib import Path
 
@@ -89,6 +90,8 @@ class ConfigurationManager:
             self.config.prepare_base_model.base_tokenizer_path
         )
         params_training = self.params.TRAINING_ARGUMENTS
+        params_dagshub = self.params.DAGSHUB_ARGUMENTS
+        params_mlflow = self.params.MLFLOW_ARGUMENTS
         # print(f"Training arguments: {params_training}")
         create_directories([config.root_dir])
 
@@ -102,15 +105,22 @@ class ConfigurationManager:
             test_tokenized_data_path=Path(config.test_tokenized_data_path),
             val_tokenized_data_path=Path(config.val_tokenized_data_path),
             params_model_name=self.params.MODEL_NAME,
-            params_evaluation_strategy=params_training.evaluation_strategy,
+            params_num_labels=self.params.NUM_LABELS,
+            params_eval_strategy=params_training.eval_strategy,
             params_save_strategy=params_training.save_strategy,
-            params_learning_rate=params_training.learning_rate,
+            params_learning_rate=float(params_training.learning_rate),
             params_per_device_train_batch_size=params_training.per_device_train_batch_size,
             params_per_device_eval_batch_size=params_training.per_device_eval_batch_size,
             params_num_train_epochs=params_training.num_train_epochs,
             params_weight_decay=params_training.weight_decay,
             params_load_best_model_at_end=params_training.load_best_model_at_end,
             params_metric_for_best_model=params_training.metric_for_best_model,
+            params_dagshub_repo_owner=params_dagshub.repo_owner,
+            params_dagshub_repo_name=params_dagshub.repo_name,
+            params_dagshub_mlflow=params_dagshub.mlflow,
+            params_mlflow_tracking_uri=params_mlflow.tracking_uri,
+            params_mlflow_experiment_name=params_mlflow.experiment_name,
+            params_mlflow_run_name=params_mlflow.run_name,
         )
 
         return model_training_config

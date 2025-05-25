@@ -1,7 +1,7 @@
 CHECKPOINT: distilbert-base-uncased
 NUM_LABELS: 33
 MAX_LENGTH: 512
-BATCH_SIZE: 16
+BATCH_SIZE: 8
 EPOCHS: 3
 MODEL_DIR: artifacts/model
 MODEL_NAME: distilbert-base-uncased
@@ -12,13 +12,23 @@ RANDOM_STATE: 42
 LABEL_COL: 'intent'
 TEXT_COL: 'instruction'
 
+DAGSHUB_ARGUMENTS:
+  repo_name: 'AirTravel_SentimentAnalysis'
+  repo_owner: "ashish.student2025"
+  mlflow: True
+
+MLFLOW_ARGUMENTS:
+  tracking_uri: "https://dagshub.com/ashish.student2025/AirTravel_SentimentAnalysis.mlflow"
+  experiment_name: "AirTravel_SentimentAnalysis"
+  run_name: "AirTravel_SentimentAnalysis_Run"
+
 TRAINING_ARGUMENTS:
-  evaluation_strategy: 'epoch'
+  eval_strategy: 'epoch'
   save_strategy: 'epoch'
   learning_rate: 2e-5
   per_device_train_batch_size: 8
   per_device_eval_batch_size: 8
-  num_train_epochs: 2
+  num_train_epochs: 1
   weight_decay: 0.01
   load_best_model_at_end: True
   metric_for_best_model: "f1"

@@ -41,3 +41,10 @@ pip install -r requirements.txt
 ```bash
 python testlogger.py
 ```
+
+## setup dagshub and mlflow 
+
+```
+export MLFLOW_TRACKING_USERNAME=ashish.student2025
+export MLFLOW_TRACKING_PASSWORD=<password/token>
+```

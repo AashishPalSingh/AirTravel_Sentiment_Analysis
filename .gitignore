@@ -178,3 +178,5 @@ artifacts/*
 
 # mlflow
 mlruns
+
+# dvc
