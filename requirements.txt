@@ -22,4 +22,5 @@ torchinfo
 peft==0.9.0
 dagshub
 torchvision
+torch>=1.13.1,<=2.1.2
 -e .
