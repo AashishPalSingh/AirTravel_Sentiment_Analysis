@@ -180,3 +180,4 @@ artifacts/*
 mlruns
 
 # dvc
+/data
