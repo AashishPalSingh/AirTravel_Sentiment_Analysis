@@ -48,3 +48,9 @@ python testlogger.py
 export MLFLOW_TRACKING_USERNAME=ashish.student2025
 export MLFLOW_TRACKING_PASSWORD=<password/token>
 ```
+
+## setup dvc 
+
+```
+export GOOGLE_APPLICATION_CREDENTIALS=grand-store-457317-n6-9842fd6986c8.json
+```

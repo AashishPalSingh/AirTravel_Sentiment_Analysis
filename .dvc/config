@@ -1,4 +1,5 @@
 [core]
     remote = remote
+    autostage = true
 ['remote "remote"']
-    url = ../gs:dvc-storage-airtravel-sentiment-analysis/storage
+    url = gs://dvc-storage-airtravel-sentiment-analysis/storage

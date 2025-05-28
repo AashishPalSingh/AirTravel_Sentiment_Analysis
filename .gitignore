@@ -181,3 +181,6 @@ mlruns
 
 # dvc
 /data
+
+# google credentials file
+grand-store-457317-n6-9842fd6986c8.json
