@@ -95,3 +95,9 @@ stages:
     outs:
       - base_model_scores.json
       - peft_model_scores.json
+  
+  run_app:
+    cmd: streamlit run app.py
+    deps:
+      - app.py
+    outs: []
