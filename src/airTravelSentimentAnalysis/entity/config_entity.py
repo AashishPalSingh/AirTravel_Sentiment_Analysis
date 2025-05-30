@@ -74,3 +74,14 @@ class ModelTrainingConfig:
     params_mlflow_tracking_uri: str
     params_mlflow_experiment_name: str
     params_mlflow_run_name: str
+
+
+@dataclass(frozen=False)
+class ModelEvaluationConfig:
+    root_dir: Path
+    base_model_path: Path
+    base_tokenizer_path: Path
+    model_path: Path
+    tokenizer_path: Path
+    val_tokenized_data_path: Path
+    params_label_col: str

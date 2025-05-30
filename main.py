@@ -17,6 +17,10 @@ from airTravelSentimentAnalysis.pipeline.stage_05_model_training import (
     ModelTrainingPipeline,
 )
 
+from airTravelSentimentAnalysis.pipeline.stage_06_model_evaluation import (
+    ModelEvaluationPipeline,
+)
+
 STAGE_NAME = "Data Ingestion stage"
 try:
     logger.info(">>>>>> stage %s started <<<<<<", STAGE_NAME)
@@ -60,12 +64,23 @@ except Exception as e:
     logger.exception(e)
     raise e
 
-STAGE_NAME = "Model Training stage"
+# STAGE_NAME = "Model Training stage"
+# try:
+#     logger.info("*******************")
+#     logger.info(">>>>>> stage %s started <<<<<<", STAGE_NAME)
+#     modelTraining = ModelTrainingPipeline()
+#     modelTraining.main()
+#     logger.info(">>>>>> stage %s completed <<<<<<\n\nx==========x", STAGE_NAME)
+# except Exception as e:
+#     logger.exception(e)
+#     raise e
+
+STAGE_NAME = "Model Evaluation stage"
 try:
     logger.info("*******************")
     logger.info(">>>>>> stage %s started <<<<<<", STAGE_NAME)
-    modelTraining = ModelTrainingPipeline()
-    modelTraining.main()
+    modelEvaluation = ModelEvaluationPipeline()
+    modelEvaluation.main()
     logger.info(">>>>>> stage %s completed <<<<<<\n\nx==========x", STAGE_NAME)
 except Exception as e:
     logger.exception(e)

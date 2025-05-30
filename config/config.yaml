@@ -34,3 +34,11 @@ model_training:
   train_tokenized_data_path: artifacts/text_processing/train
   test_tokenized_data_path: artifacts/text_processing/test
   val_tokenized_data_path: artifacts/text_processing/val
+
+model_evaluation:
+  root_dir: artifacts/model_evaluation
+  base_model_path: artifacts/prepare_base_model/base_model.h5
+  base_tokenizer_path: artifacts/prepare_base_tokenizer/base_model.h5
+  model_path: artifacts/model_training/model.h5
+  tokenizer_path: artifacts/model_training/tokenizer.h5
+  val_tokenized_data_path: artifacts/text_processing/val

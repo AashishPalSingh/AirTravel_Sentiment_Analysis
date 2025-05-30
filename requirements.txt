@@ -2,6 +2,7 @@ dvc
 dvc[gcs]
 dvc-gs
 mlflow==2.12.1
+streamlit
 black
 pylint
 python-box

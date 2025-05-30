@@ -6,6 +6,7 @@ from airTravelSentimentAnalysis.entity.config_entity import (
     DataProcessingConfig,
     TextProcessingConfig,
     ModelTrainingConfig,
+    ModelEvaluationConfig,
 )
 from pathlib import Path
 
@@ -124,3 +125,17 @@ class ConfigurationManager:
         )
 
         return model_training_config
+
+    def get_model_evaluation_config(self) -> ModelEvaluationConfig:
+        config = self.config.model_evaluation
+        create_directories([config.root_dir])
+        model_evaluation_config = ModelEvaluationConfig(
+            root_dir=Path(config.root_dir),
+            base_model_path=Path(config.base_model_path),
+            base_tokenizer_path=Path(config.base_tokenizer_path),
+            model_path=Path(config.model_path),
+            tokenizer_path=Path(config.tokenizer_path),
+            val_tokenized_data_path=Path(config.val_tokenized_data_path),
+            params_label_col=self.params.LABEL_COL,
+        )
+        return model_evaluation_config

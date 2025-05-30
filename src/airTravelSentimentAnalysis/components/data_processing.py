@@ -8,6 +8,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
+import joblib
 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
@@ -125,6 +126,7 @@ class DataProcessing:
         copydf[self.config.params_label_col] = le.fit_transform(
             copydf[self.config.params_label_col]
         )
+        joblib.dump(le, "label_encoder.pkl")
         self.df = copydf
         return self.df
 
