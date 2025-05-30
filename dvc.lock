@@ -1,0 +1,175 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/airTravelSentimentAnalysis/pipeline/stage_01_data_ingestion.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: d8c525d56df152d47a80ff246af0b312
+      size: 1590
+    - path: src/airTravelSentimentAnalysis/pipeline/stage_01_data_ingestion.py
+      hash: md5
+      md5: feb5406ccca444cbcd9365772d9c528c
+      size: 941
+    outs:
+    - path: artifacts/data_ingestion
+      hash: md5
+      md5: fd762521035cfc9f8b9060a5c70353e5.dir
+      size: 21405899
+      nfiles: 3
+  prepare_base_model:
+    cmd: python src/airTravelSentimentAnalysis/pipeline/stage_02_prepare_base_model.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: d8c525d56df152d47a80ff246af0b312
+      size: 1590
+    - path: src/airTravelSentimentAnalysis/pipeline/stage_02_prepare_base_model.py
+      hash: md5
+      md5: 975b6d6348cdb459b085ca8930df09ff
+      size: 1040
+    params:
+      params.yaml:
+        CHECKPOINT: distilbert-base-uncased
+        NUM_LABELS: 33
+    outs:
+    - path: artifacts/prepare_base_model/base_model.h5
+      hash: md5
+      md5: ab8911ad49762337a145ce96f15271f3.dir
+      size: 267929978
+      nfiles: 2
+    - path: artifacts/prepare_base_tokenizer/base_model.h5
+      hash: md5
+      md5: 87cbf4e29b7d66cc86d3d919da97594d.dir
+      size: 944287
+      nfiles: 4
+  data_preprocessing:
+    cmd: python src/airTravelSentimentAnalysis/pipeline/stage_03_preprocessing.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: d8c525d56df152d47a80ff246af0b312
+      size: 1590
+    - path: src/airTravelSentimentAnalysis/pipeline/stage_03_preprocessing.py
+      hash: md5
+      md5: bbae4710a7e21eaf5a947e3804f3bc91
+      size: 1926
+    params:
+      params.yaml:
+        LABEL_COL: intent
+        RANDOM_STATE: 42
+        TEST_SIZE: 0.2
+        TEXT_COL: instruction
+    outs:
+    - path: artifacts/data_preprocessing/test.csv
+      hash: md5
+      md5: c18a5ef66577022e5c1b89f41bc02dd1
+      size: 327203
+    - path: artifacts/data_preprocessing/train.csv
+      hash: md5
+      md5: 650e3dfa71cfd40765683f61666e084b
+      size: 1311554
+    - path: artifacts/data_preprocessing/val.csv
+      hash: md5
+      md5: 650554ae0633b914bd41b298d63d7096
+      size: 408398
+  text_processing:
+    cmd: python src/airTravelSentimentAnalysis/pipeline/stage_04_text_processing.py
+    deps:
+    - path: artifacts/data_preprocessing/test.csv
+      hash: md5
+      md5: c18a5ef66577022e5c1b89f41bc02dd1
+      size: 327203
+    - path: artifacts/data_preprocessing/train.csv
+      hash: md5
+      md5: 650e3dfa71cfd40765683f61666e084b
+      size: 1311554
+    - path: artifacts/data_preprocessing/val.csv
+      hash: md5
+      md5: 650554ae0633b914bd41b298d63d7096
+      size: 408398
+    - path: config/config.yaml
+      hash: md5
+      md5: d8c525d56df152d47a80ff246af0b312
+      size: 1590
+    - path: src/airTravelSentimentAnalysis/pipeline/stage_04_text_processing.py
+      hash: md5
+      md5: 6ba8c928548a3b1cda42482463d2862c
+      size: 1771
+    params:
+      params.yaml:
+        MODEL_NAME: distilbert-base-uncased
+        TEXT_COL: instruction
+    outs:
+    - path: artifacts/text_processing/test
+      hash: md5
+      md5: 08cbeea60e8c612d8837270bdbbf21a6.dir
+      size: 1057348
+      nfiles: 3
+    - path: artifacts/text_processing/train
+      hash: md5
+      md5: 6bd4538f92f55cdcda4c779735efec70.dir
+      size: 4317020
+      nfiles: 3
+    - path: artifacts/text_processing/val
+      hash: md5
+      md5: c5b1bf086fd81dd5a8e14deacea36117.dir
+      size: 1304644
+      nfiles: 3
+  model_training:
+    cmd: python src/airTravelSentimentAnalysis/pipeline/stage_05_model_training.py
+    deps:
+    - path: artifacts/prepare_base_model
+      hash: md5
+      md5: 563e7859d684792b56df5adc29b520af.dir
+      size: 267929978
+      nfiles: 2
+    - path: artifacts/text_processing/test
+      hash: md5
+      md5: 08cbeea60e8c612d8837270bdbbf21a6.dir
+      size: 1057348
+      nfiles: 3
+    - path: artifacts/text_processing/train
+      hash: md5
+      md5: 6bd4538f92f55cdcda4c779735efec70.dir
+      size: 4317020
+      nfiles: 3
+    - path: artifacts/text_processing/val
+      hash: md5
+      md5: c5b1bf086fd81dd5a8e14deacea36117.dir
+      size: 1304644
+      nfiles: 3
+    - path: config/config.yaml
+      hash: md5
+      md5: d8c525d56df152d47a80ff246af0b312
+      size: 1590
+    - path: src/airTravelSentimentAnalysis/pipeline/stage_05_model_training.py
+      hash: md5
+      md5: 251d283bcc2a2dc1b2711b825c22cc5f
+      size: 928
+    params:
+      params.yaml:
+        MLFLOW_ARGUMENTS.experiment_name: AirTravel_SentimentAnalysis_PEFT_FINE_TUNING
+        MLFLOW_ARGUMENTS.run_name: AirTravel_SentimentAnalysis_Run
+        MLFLOW_ARGUMENTS.tracking_uri: https://dagshub.com/ashish.student2025/AirTravel_SentimentAnalysis.mlflow
+        NUM_LABELS: 33
+        TRAINING_ARGUMENTS.eval_strategy: epoch
+        TRAINING_ARGUMENTS.learning_rate: 2e-05
+        TRAINING_ARGUMENTS.load_best_model_at_end: true
+        TRAINING_ARGUMENTS.metric_for_best_model: f1
+        TRAINING_ARGUMENTS.num_train_epochs: 10
+        TRAINING_ARGUMENTS.per_device_eval_batch_size: 8
+        TRAINING_ARGUMENTS.per_device_train_batch_size: 8
+        TRAINING_ARGUMENTS.save_strategy: epoch
+        TRAINING_ARGUMENTS.weight_decay: 0.01
+    outs:
+    - path: artifacts/model_training/model.h5
+      hash: md5
+      md5: 6a8781818db35701df94f7c8993a6e80.dir
+      size: 89674956
+      nfiles: 128
+    - path: artifacts/model_training/tokenizer.h5
+      hash: md5
+      md5: 02e4f6c618a056cd4675fc356cd1e478.dir
+      size: 944887
+      nfiles: 4

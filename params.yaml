@@ -2,7 +2,7 @@ CHECKPOINT: distilbert-base-uncased
 NUM_LABELS: 33
 MAX_LENGTH: 512
 BATCH_SIZE: 8
-EPOCHS: 3
+EPOCHS: 10
 MODEL_DIR: artifacts/model
 MODEL_NAME: distilbert-base-uncased
 TEST_SIZE: 0.2
@@ -19,7 +19,7 @@ DAGSHUB_ARGUMENTS:
 
 MLFLOW_ARGUMENTS:
   tracking_uri: "https://dagshub.com/ashish.student2025/AirTravel_SentimentAnalysis.mlflow"
-  experiment_name: "AirTravel_SentimentAnalysis"
+  experiment_name: "AirTravel_SentimentAnalysis_PEFT_FINE_TUNING"
   run_name: "AirTravel_SentimentAnalysis_Run"
 
 TRAINING_ARGUMENTS:
@@ -28,7 +28,7 @@ TRAINING_ARGUMENTS:
   learning_rate: 2e-5
   per_device_train_batch_size: 8
   per_device_eval_batch_size: 8
-  num_train_epochs: 1
+  num_train_epochs: 10
   weight_decay: 0.01
   load_best_model_at_end: True
   metric_for_best_model: "f1"

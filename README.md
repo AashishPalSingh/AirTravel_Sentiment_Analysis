@@ -28,12 +28,17 @@ python -m venv venv
 ```
 
 ```bash
-venv/bin/activate
+venv/bin/activate 
+source venv/Scripts/Activate
 ```
 
 ### STEP 02- install the requirements
 ```bash
 pip install -r requirements.txt
+```
+
+```bash
+python init_project.py
 ```
 
 
@@ -46,7 +51,7 @@ python testlogger.py
 
 ```
 export MLFLOW_TRACKING_USERNAME=ashish.student2025
-export MLFLOW_TRACKING_PASSWORD=<password/token>
+export MLFLOW_TRACKING_PASSWORD=6402a3805769c4b539bb41f9be2830e326045e18
 ```
 
 ## setup dvc 
@@ -54,3 +59,13 @@ export MLFLOW_TRACKING_PASSWORD=<password/token>
 ```
 export GOOGLE_APPLICATION_CREDENTIALS=grand-store-457317-n6-9842fd6986c8.json
 ```
+
+```
+dvc init
+dvc remote add -d remote gs://dvc-storage-airtravel-sentiment-analysis/storage
+dvc add data
+dvc push -r remote -v
+dvc repro
+dvc dag
+```
+

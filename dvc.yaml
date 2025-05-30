@@ -1,0 +1,78 @@
+stages:
+  data_ingestion:
+    cmd: python src/airTravelSentimentAnalysis/pipeline/stage_01_data_ingestion.py
+    deps:
+      - src/airTravelSentimentAnalysis/pipeline/stage_01_data_ingestion.py
+      - config/config.yaml
+    outs:
+      - artifacts/data_ingestion
+
+  prepare_base_model:
+    cmd: python src/airTravelSentimentAnalysis/pipeline/stage_02_prepare_base_model.py
+    deps:
+      - src/airTravelSentimentAnalysis/pipeline/stage_02_prepare_base_model.py
+      - config/config.yaml
+    params:
+      - NUM_LABELS
+      - CHECKPOINT
+    outs:
+      - artifacts/prepare_base_model/base_model.h5
+      - artifacts/prepare_base_tokenizer/base_model.h5
+
+  data_preprocessing:
+    cmd: python src/airTravelSentimentAnalysis/pipeline/stage_03_preprocessing.py
+    deps:
+      - src/airTravelSentimentAnalysis/pipeline/stage_03_preprocessing.py
+      - config/config.yaml
+    params:
+      - LABEL_COL
+      - TEXT_COL
+      - TEST_SIZE
+      - RANDOM_STATE
+    outs:
+      - artifacts/data_preprocessing/train.csv
+      - artifacts/data_preprocessing/test.csv
+      - artifacts/data_preprocessing/val.csv
+  
+  text_processing:
+    cmd: python src/airTravelSentimentAnalysis/pipeline/stage_04_text_processing.py
+    deps:
+      - src/airTravelSentimentAnalysis/pipeline/stage_04_text_processing.py
+      - config/config.yaml
+      - artifacts/data_preprocessing/train.csv
+      - artifacts/data_preprocessing/test.csv
+      - artifacts/data_preprocessing/val.csv
+    params:
+      - MODEL_NAME
+      - TEXT_COL
+    outs:
+      - artifacts/text_processing/train
+      - artifacts/text_processing/test
+      - artifacts/text_processing/val
+
+  model_training:
+    cmd: python src/airTravelSentimentAnalysis/pipeline/stage_05_model_training.py
+    deps:
+      - src/airTravelSentimentAnalysis/pipeline/stage_05_model_training.py
+      - config/config.yaml
+      - artifacts/text_processing/train
+      - artifacts/text_processing/test
+      - artifacts/text_processing/val
+      - artifacts/prepare_base_model
+    params:
+      - MLFLOW_ARGUMENTS.run_name
+      - MLFLOW_ARGUMENTS.experiment_name
+      - MLFLOW_ARGUMENTS.tracking_uri
+      - TRAINING_ARGUMENTS.eval_strategy
+      - TRAINING_ARGUMENTS.save_strategy
+      - TRAINING_ARGUMENTS.learning_rate
+      - TRAINING_ARGUMENTS.per_device_train_batch_size
+      - TRAINING_ARGUMENTS.per_device_eval_batch_size
+      - TRAINING_ARGUMENTS.num_train_epochs
+      - TRAINING_ARGUMENTS.weight_decay 
+      - TRAINING_ARGUMENTS.load_best_model_at_end
+      - TRAINING_ARGUMENTS.metric_for_best_model
+      - NUM_LABELS
+    outs:
+      - artifacts/model_training/model.h5
+      - artifacts/model_training/tokenizer.h5

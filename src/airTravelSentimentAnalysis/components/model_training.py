@@ -152,6 +152,7 @@ class ModelTraining:
                 artifact_path="fine_tuned",
                 task="text-classification",
                 model_config=model_config,
+                registered_model_name="peft_fine_tuned_model_10_epochs",
             )
         print("Model saved in run %s" % model_info.model_uri)
         logger.info("Model saved in run %s", model_info.model_uri)

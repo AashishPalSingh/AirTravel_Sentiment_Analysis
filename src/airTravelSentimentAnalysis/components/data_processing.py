@@ -59,7 +59,7 @@ class DataProcessing:
             self.df, x=self.config.params_label_col, hue=self.config.params_label_col
         )
         plt.xticks(rotation=90)
-        plt.show()
+        # plt.show()
 
     def radialGraph(self):
         targetCounts = self.df[self.config.params_label_col].value_counts()
@@ -80,7 +80,7 @@ class DataProcessing:
         )
         plt.title("Intent Distribution", fontsize=20)
 
-        plt.show()
+        # plt.show()
 
     def preProcessData(self):
         # Drop duplicates
