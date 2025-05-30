@@ -13,13 +13,14 @@
 9. Update the dvc.yaml
 10. app.py
 
-### STEPS:
+## STEPS:
 
-Clone the repository
+### Clone the repository
 
 ```bash
 https://github.com/AashishPalSingh/AirTravel_Sentiment_Analysis
 ```
+
 ### Create a venv environment after opening the repository
 
 ```bash
@@ -36,28 +37,54 @@ source venv/Scripts/Activate
 pip install -r requirements.txt
 ```
 
+### create .env file with below or set up manually like next 2 steps (setup dagshub and mlflow ,setup dvc )
+```
+MLFLOW_TRACKING_USERNAME=ashish.student2025
+MLFLOW_TRACKING_PASSWORD=</token>
+GOOGLE_APPLICATION_CREDENTIALS=google access json
+```
+
 ```bash
 python init_project.py
 ```
 
-
-## Test Logger
-```bash
-python testlogger.py
-```
-
-## setup dagshub and mlflow 
+### setup dagshub and mlflow 
 
 ```
 export MLFLOW_TRACKING_USERNAME=ashish.student2025
 export MLFLOW_TRACKING_PASSWORD=6402a3805769c4b539bb41f9be2830e326045e18
 ```
 
-## setup dvc 
+### setup dvc 
 
 ```
 export GOOGLE_APPLICATION_CREDENTIALS=grand-store-457317-n6-9842fd6986c8.json
 ```
+
+### execution
+```
+dvv repro
+```
+
+OR
+
+```
+python main.py
+```
+
+### Run Application
+```
+streamlit run app.py
+```
+
+## Extras
+
+### Test Logger
+```bash
+python testlogger.py
+```
+
+### DVC commands
 
 ```
 dvc init
@@ -69,6 +96,4 @@ dvc dag
 ```
 
 
-```
-streamlit run app.py
-```
+
