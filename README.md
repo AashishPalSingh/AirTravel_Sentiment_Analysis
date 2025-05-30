@@ -51,7 +51,7 @@ python testlogger.py
 
 ```
 export MLFLOW_TRACKING_USERNAME=ashish.student2025
-export MLFLOW_TRACKING_PASSWORD=6402a3805769c4b539bb41f9be2830e326045e18
+export MLFLOW_TRACKING_PASSWORD=<token>
 ```
 
 ## setup dvc 
