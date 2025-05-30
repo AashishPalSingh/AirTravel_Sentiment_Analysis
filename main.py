@@ -64,16 +64,16 @@ except Exception as e:
     logger.exception(e)
     raise e
 
-# STAGE_NAME = "Model Training stage"
-# try:
-#     logger.info("*******************")
-#     logger.info(">>>>>> stage %s started <<<<<<", STAGE_NAME)
-#     modelTraining = ModelTrainingPipeline()
-#     modelTraining.main()
-#     logger.info(">>>>>> stage %s completed <<<<<<\n\nx==========x", STAGE_NAME)
-# except Exception as e:
-#     logger.exception(e)
-#     raise e
+STAGE_NAME = "Model Training stage"
+try:
+    logger.info("*******************")
+    logger.info(">>>>>> stage %s started <<<<<<", STAGE_NAME)
+    modelTraining = ModelTrainingPipeline()
+    modelTraining.main()
+    logger.info(">>>>>> stage %s completed <<<<<<\n\nx==========x", STAGE_NAME)
+except Exception as e:
+    logger.exception(e)
+    raise e
 
 STAGE_NAME = "Model Evaluation stage"
 try:
