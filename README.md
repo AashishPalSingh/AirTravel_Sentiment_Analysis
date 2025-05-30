@@ -13,7 +13,6 @@
 9. Update the dvc.yaml
 10. app.py
 
-# How to run?
 ### STEPS:
 
 Clone the repository
@@ -21,7 +20,7 @@ Clone the repository
 ```bash
 https://github.com/AashishPalSingh/AirTravel_Sentiment_Analysis
 ```
-### STEP 01- Create a venv environment after opening the repository
+### Create a venv environment after opening the repository
 
 ```bash
 python -m venv venv
@@ -32,7 +31,7 @@ venv/bin/activate
 source venv/Scripts/Activate
 ```
 
-### STEP 02- install the requirements
+### install the requirements
 ```bash
 pip install -r requirements.txt
 ```
@@ -51,7 +50,7 @@ python testlogger.py
 
 ```
 export MLFLOW_TRACKING_USERNAME=ashish.student2025
-export MLFLOW_TRACKING_PASSWORD=<token>
+export MLFLOW_TRACKING_PASSWORD=6402a3805769c4b539bb41f9be2830e326045e18
 ```
 
 ## setup dvc 
@@ -69,3 +68,7 @@ dvc repro
 dvc dag
 ```
 
+
+```
+streamlit run app.py
+```
